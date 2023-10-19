@@ -1,10 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import axios from 'axios';
 
 export default function App() {
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://hoopconnectbackend.vercel.app/api/hello');
+        setMessage(response.data.message);
+      } catch (error) {
+        console.error('Erreur lors de la récupération du message:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      {!message ? <Text>Chargement ...</Text> : <Text>(/api/hello): {message}</Text>}
       <StatusBar style="auto" />
     </View>
   );

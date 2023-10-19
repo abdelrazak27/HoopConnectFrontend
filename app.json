@@ -3,6 +3,12 @@
     "name": "HoopFrontExpo",
     "slug": "HoopFrontExpo",
     "version": "1.0.0",
+    "updates": {
+      "fallbackToCacheTimeout": 0,
+      "checkAutomatically": "ON_LOAD",
+      "useClassicUpdates": false,
+      "url": "https://u.expo.dev/a9014687-915e-4ddb-9361-b36f249f6511"
+    },
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -15,16 +21,27 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.abdelr.HoopFrontExpo"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.abdelr.HoopFrontExpo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a9014687-915e-4ddb-9361-b36f249f6511"
+      }
+    },
+    "owner": "abdelr",
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }
