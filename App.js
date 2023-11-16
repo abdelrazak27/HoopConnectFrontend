@@ -1,36 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
-import axios from 'axios';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { onAuthStateChanged } from 'firebase/auth';
+import { FIREBASE_AUTH } from './firebaseConfig';
+
+// Imports des écrans
+import HomeScreen from './screens/HomeScreen';
+import SignUpScreen from './screens/SignUpScreen';
+import SignInScreen from './screens/SignInScreen';
+
+const Stack = createStackNavigator();
+
+const AppStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="SignUp" component={SignUpScreen} />
+      <Stack.Screen name="SignIn" component={SignInScreen} />
+    </Stack.Navigator>
+  );
+};
 
 export default function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('https://hoopconnectbackend.vercel.app/api/hello');
-        setMessage(response.data.message);
-      } catch (error) {
-        console.error('Erreur lors de la récupération du message:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
-    <View style={styles.container}>
-      {!message ? <Text>Chargement ...</Text> : <Text>(/api/hello): {message}</Text>}
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <AppStack />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
