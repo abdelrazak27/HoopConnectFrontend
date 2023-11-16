@@ -52,21 +52,25 @@ const HomeScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             {!message ? <Text>Chargement ...</Text> : <Text>(/api/hello): {message}</Text>}
-            {user && (
+            {user ? (
                 <>
                     <Text>Connecté en tant que : {user.email}</Text>
                     <Button title="Déconnexion" onPress={handleSignOut} />
                 </>
+            ) : (
+                <>
+                    <Button
+                        title="Inscription"
+                        onPress={() => navigation.navigate('SignUp')}
+                    />
+                    <Button
+                        title="Connexion"
+                        onPress={() => navigation.navigate('SignIn')}
+                    />
+                </>
             )}
             <StatusBar style="auto" />
-            <Button
-                title="Inscription"
-                onPress={() => navigation.navigate('SignUp')}
-            />
-            <Button
-                title="Connexion"
-                onPress={() => navigation.navigate('SignIn')}
-            />
+            
         </View>
     );
 };
